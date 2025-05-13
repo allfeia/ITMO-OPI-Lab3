@@ -1,312 +1,318 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.example</groupId>
-  <artifactId>Lab3</artifactId>
-  <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>Lab3 Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.example</groupId>
+    <artifactId>Lab3</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>Lab3 Maven Webapp</name>
+    <url>http://maven.apache.org</url>
 
-  <properties>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <skipTests>false</skipTests>
-  </properties>
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <skipTests>false</skipTests>
+        <main.class>src/main/java/CheckPointBean</main.class>
+    </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>com.sun.faces</groupId>
-      <artifactId>jsf-api</artifactId>
-      <version>2.1.7</version>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>6.2.3.Final</version>
-    </dependency>
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>42.7.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.primefaces</groupId>
-      <artifactId>primefaces</artifactId>
-      <version>14.0.6</version>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.persistence</groupId>
-      <artifactId>jakarta.persistence-api</artifactId>
-      <version>3.1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.15.2</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.8.2</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.2.3.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>14.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.2</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-  <build>
-    <plugins>
+    <build>
+        <plugins>
 
-<!--      Compile-->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.11.0</version>
-      </plugin>
-
-<!--      Package-->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.2.0</version>
-        <executions>
-          <execution>
-            <id>custom-war</id>
-            <phase>package</phase>
-            <goals>
-              <goal>war</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>${main.class}</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
-
-<!--      Clean-->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-clean-plugin</artifactId>
-        <version>3.2.0</version>
-        <configuration>
-          <filesets>
-            <fileset>
-              <directory>${project.build.directory}</directory>
-              <includes>
-                <include>**/*</include>
-              </includes>
-            </fileset>
-          </filesets>
-        </configuration>
-      </plugin>
-
-<!--      Test-->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M5</version>
-        <configuration>
-          <skipTests>${skipTests}</skipTests>
-        </configuration>
-      </plugin>
-
-<!--      Validate XML-->
-
-<!--      Params from build.properties-->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>properties-maven-plugin</artifactId>
-        <version>1.2.1</version>
-        <executions>
-          <execution>
-            <phase>validate</phase>
-            <goals>
-              <goal>read-project-properties</goal>
-            </goals>
-            <configuration>
-              <files>
-                <file>build.properties</file>
-              </files>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-
-      <profiles>
-        <profile>
-          <id>build</id>
-          <properties>
-            <skipTests>true</skipTests>
-          </properties>
-        </profile>
-
-<!--        Music-->
-        <profile>
-          <id>music</id>
-          <build>
-            <plugins>
-              <plugin>
+            <!--      Clean-->
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                  <execution>
-                    <id>play-music</id>
-                    <phase>verify</phase>
-                    <goals>
-                      <goal>run</goal>
-                    </goals>
-                    <configuration>
-                      <target>
-                        <exec executable="${music.player}">
-                          <arg value="${music.file}"/>
-                        </exec>
-                      </target>
-                    </configuration>
-                  </execution>
-                </executions>
-              </plugin>
-            </plugins>
-          </build>
-        </profile>
-
-        <profile>
-          <id>xml</id>
-          <properties>
-            <skipTests>true</skipTests>
-          </properties>
-          <build>
-            <plugins>
-
-              <!-- XML Validation -->
-              <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>xml-maven-plugin</artifactId>
-                <version>1.1.0</version>
-                <executions>
-                  <execution>
-                    <id>validate-xml</id>
-                    <phase>verify</phase>
-                    <goals>
-                      <goal>validate</goal>
-                    </goals>
-                    <configuration>
-                      <validationSets>
-                        <validationSet>
-                          <dir>${project.basedir}/src/main/resources</dir>
-                          <includes>
-                            <include>**/*.xml</include>
-                          </includes>
-                        </validationSet>
-                        <validationSet>
-                          <dir>${project.basedir}/src/main/webapp/WEB-INF</dir>
-                          <includes>
-                            <include>**/*.xml</include>
-                          </includes>
-                        </validationSet>
-                      </validationSets>
-                    </configuration>
-                  </execution>
-                </executions>
-              </plugin>
-            </plugins>
-          </build>
-        </profile>
-
-<!--        Alt-->
-        <profile>
-          <id>alt</id>
-          <build>
-            <plugins>
-              <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                  <execution>
-                    <phase>process-sources</phase>
-                    <goals>
-                      <goal>run</goal>
-                    </goals>
-                    <configuration>
-                      <target>
-
-                        <replace dir="${basedir}/src/main/java" token="oldValue"
-                                 value="newValue"/>
-                      </target>
-                    </configuration>
-                  </execution>
-                </executions>
-              </plugin>
-            </plugins>
-          </build>
-        </profile>
-
-        <profile>
-          <id>native2ascii</id>
-          <build>
-            <plugins>
-              <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                  <execution>
-                    <phase>process-resources</phase>
-                    <goals>
-                      <goal>run</goal>
-                    </goals>
-                    <configuration>
-                      <target>
-                        <native2ascii
-                                encoding="UTF-8"
-                                src="${localization.dir}"
-                                dest="${localization.files}"/>
-                      </target>
-                    </configuration>
-                  </execution>
-                </executions>
-              </plugin>
-            </plugins>
-          </build>
-        </profile>
-
-<!--        Diff-->
-        <profile>
-          <id>diff</id>
-          <build>
-            <plugins>
-              <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-scm-plugin</artifactId>
-                <version>2.1.0</version>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.2.0</version>
                 <configuration>
-                  <connectionType>connection</connectionType>
-                  <connectionUrl>scm:git:${git.repo.url}</connectionUrl>
-                  <includes>${diff.classes}</includes>
-                  <message>Auto-commit changes in ${diff.classes}</message>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.build.directory}</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>${project.build.directory}/*.properties</directory>
+                            <includes>
+                                <include>**/*.properties</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
                 </configuration>
+            </plugin>
+
+            <!--      Params from build.properties-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.2.1</version>
                 <executions>
-                  <execution>
-                    <id>git-diff</id>
-                    <phase>validate</phase>
-                    <goals>
-                      <goal>checkin</goal>
-                    </goals>
-                  </execution>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>build.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
                 </executions>
-              </plugin>
-            </plugins>
-          </build>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--  target build with compile, war, music (packaging before tests)-->
+
+    <profiles>
+        <profile>
+            <id>build</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.13.0</version>
+                        <executions>
+                            <execution>
+                                <id>profile-build-compile</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>3.4.0</version>
+                        <executions>
+                            <execution>
+                                <id>profile-build-war</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>war</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>play-music</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <exec executable="${music.player}">
+                                            <arg value="${music.file}"/>
+                                        </exec>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M5</version>
+                        <executions>
+                            <execution>
+                                <id>default-test</id>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
         </profile>
 
-<!--        History-->
+        <!-- XML Validation -->
+        <profile>
+            <id>xml</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>xml-maven-plugin</artifactId>
+                        <version>1.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>validate-xml</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>validate</goal>
+                                </goals>
+                                <configuration>
+                                    <validationSets>
+                                        <validationSet>
+                                            <dir>${project.basedir}/src/main/resources</dir>
+                                            <includes>
+                                                <include>**/*.xml</include>
+                                            </includes>
+                                        </validationSet>
+                                        <validationSet>
+                                            <dir>${project.basedir}/src/main/webapp/WEB-INF</dir>
+                                            <includes>
+                                                <include>**/*.xml</include>
+                                            </includes>
+                                        </validationSet>
+                                    </validationSets>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 
-      </profiles>
+        <!--        Alt-->
+        <profile>
+            <id>alt</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+
+                                        <replace dir="${basedir}/src/main/java" token="oldValue"
+                                                 value="newValue"/>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>native2ascii</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <native2ascii
+                                                encoding="UTF-8"
+                                                src="${localization.dir}"
+                                                dest="${localization.files}"/>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--        Diff-->
+        <profile>
+            <id>diff</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-scm-plugin</artifactId>
+                        <version>2.1.0</version>
+                        <configuration>
+                            <connectionType>connection</connectionType>
+                            <connectionUrl>scm:git:${git.repo.url}</connectionUrl>
+                            <includes>${diff.classes}</includes>
+                            <message>Auto-commit changes in ${diff.classes}</message>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>git-diff</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>checkin</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--        History-->
+
+
+    </profiles>
 </project>
+
