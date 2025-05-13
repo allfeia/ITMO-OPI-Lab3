@@ -307,34 +307,6 @@
         </profile>
 
 <!--        History-->
-        <profile>
-          <id>history</id>
-          <build>
-            <plugins>
-              <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                  <execution>
-                    <id>run-history</id>
-                    <phase>validate</phase>
-                    <goals>
-                      <goal>exec</goal>
-                    </goals>
-                    <configuration>
-                      <executable>bash</executable>
-                      <arguments>
-                        <argument>${project.basedir}/scripts/history.sh</argument>
-                      </arguments>
-                    </configuration>
-                  </execution>
-                </executions>
-              </plugin>
-            </plugins>
-          </build>
-        </profile>
-
 
       </profiles>
 </project>
