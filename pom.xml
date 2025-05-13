@@ -288,7 +288,7 @@
                 <version>2.1.0</version>
                 <configuration>
                   <connectionType>connection</connectionType>
-                  <connectionUrl>scm:git:${git.repo.url}</connectionUrl>
+                  <connectionUrl>scm:git:https://github.com/allfeia/ITMO-OPI-Lab3.git</connectionUrl>
 <!--                  <basedirRelative>true</basedirRelative>-->
                   <includes>${diff.classes}</includes>
 <!--                  <excludes>**/target/**,.idea/**,*.iml</excludes>-->
