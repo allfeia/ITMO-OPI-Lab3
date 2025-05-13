@@ -30,6 +30,11 @@ body{
     transition: background-color 0.3s ease; /* Плавное изменение цвета при наведении */
 }
 
+.change-lang {
+    top: 150px;
+    left: 20px;
+}
+
 .swamp-button:hover {
     background-color: darkgreen; /* Более тёмный зелёный при наведении */
 }

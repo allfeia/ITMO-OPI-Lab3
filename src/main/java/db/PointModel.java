@@ -11,15 +11,15 @@ public class PointModel {
     private double x;
     private double y;
     private double r;
-    private boolean isHit;
+    private boolean is_hit;
     private String server_time;
     private String execution_time;
 
-    public PointModel(double x, double y, double r, boolean isHit, String executionTime, String serverTime) {
+    public PointModel(double x, double y, double r, boolean is_hit, String executionTime, String serverTime) {
         this.x = x;
         this.y = y;
         this.r = r;
-        this.isHit = isHit;
+        this.is_hit = is_hit;
         this.execution_time = executionTime;
         this.server_time = serverTime;
     }
@@ -51,8 +51,8 @@ public class PointModel {
         this.r = r;
     }
 
-    public boolean getIsHit() { return isHit; }
-    public void setIsHit(boolean isHit) { this.isHit = isHit; }
+    public boolean getIsHit() { return is_hit; }
+    public void setIsHit(boolean isHit) { this.is_hit = is_hit; }
 
 
     public String getServer_time() {

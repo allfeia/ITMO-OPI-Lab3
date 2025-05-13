@@ -19,4 +19,16 @@
         </navigation-case>
     </navigation-rule>
 
+    <application>
+        <resource-bundle>
+            <base-name>localization.messages</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <locale-config>
+            <default-locale>ru</default-locale>
+            <supported-locale>en</supported-locale>
+            <supported-locale>ru</supported-locale>
+        </locale-config>
+    </application>
+
 </faces-config>

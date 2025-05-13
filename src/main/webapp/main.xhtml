@@ -5,17 +5,23 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
-    <title>Главная</title>
+    <title>#{bundle['page.title']}</title>
     <link rel="stylesheet" href="style/main.css"/>
     <link rel="" href="style/main.css"/>
 
 </h:head>
 <h:body>
-    <div class="header">
-        Nabokova Alisa Vladislavovna  group: P3220 var: 9811
-    </div>
+<!--    <div class="header">-->
+<!--        #{bundle['header.text']}-->
+<!--    </div>-->
     <h:form>
-        <h:commandButton id="openButton" value="get out" action="goToIndex" styleClass="swamp-button"/>
+        <h:commandButton id="openButton" value="#{bundle['button.getout']}" action="goToIndex" styleClass="swamp-button"/>
+        <h:commandButton id="change-lang-ru" value="Русский" action="#{languageBean.changeLanguage('ru')}">
+            <f:ajax render="@all"/>
+        </h:commandButton>
+        <h:commandButton id="change-lang-en" value="English" action="#{languageBean.changeLanguage('en')}">
+            <f:ajax render="@all"/>
+        </h:commandButton>
         <section class="block plot-section">
             <div class="left-block" id="axis">
                 <svg height="300" width="300" xmlns="http://www.w3.org/2000/svg" id="axis-svg">
@@ -82,36 +88,6 @@
                     <!-- R -->
                     <line stroke="white" x1="145" x2="155" y1="250" y2="250"></line>
 
-                    <!-- Подписи к засечкам -->
-<!--                    <text fill="white" font-size="10" x="195" y="140">1.5</text>-->
-<!--                    <text fill="white" font-size="10" x="248" y="140">3</text>-->
-
-<!--                    <text fill="white" font-size="10" x="40" y="140">-3</text>-->
-<!--                    <text fill="white" font-size="10" x="90" y="140">-1.5</text>-->
-
-<!--                    <text fill="white" font-size="10" x="160" y="105">1.5</text>-->
-<!--                    <text fill="white" font-size="10" x="160" y="55">3</text>-->
-
-<!--                    <text fill="white" font-size="10" x="160" y="205">-1.5</text>-->
-<!--                    <text fill="white" font-size="10" x="160" y="255">-3</text>-->
-
-                    <!-- Подписи на оси X -->
-<!--                    <text fill="white" font-size="10" x="210" y="140">1</text>-->
-<!--                    <text fill="white" font-size="10" x="235" y="140">2</text>-->
-<!--                    <text fill="white" font-size="10" x="260" y="140">2.5</text>-->
-
-<!--                    <text fill="white" font-size="10" x="110" y="140">-1</text>-->
-<!--                    <text fill="white" font-size="10" x="85" y="140">-2</text>-->
-<!--                    <text fill="white" font-size="10" x="60" y="140">-2.5</text>-->
-
-<!--                    &lt;!&ndash; Подписи на оси Y &ndash;&gt;-->
-<!--                    <text fill="white" font-size="10" x="160" y="120">1</text>-->
-<!--                    <text fill="white" font-size="10" x="160" y="90">2</text>-->
-<!--                    <text fill="white" font-size="10" x="160" y="65">2.5</text>-->
-
-<!--                    <text fill="white" font-size="10" x="160" y="175">-1</text>-->
-<!--                    <text fill="white" font-size="10" x="160" y="210">-2</text>-->
-<!--                    <text fill="white" font-size="10" x="160" y="235">-2.5</text>-->
 
                     <text fill="white" x="160" y="10">Y</text>
                     <text fill="white" x="290" y="140">X</text>
@@ -131,7 +107,7 @@
         </section>
         <div class="right-block">
             <div class="form-group">
-                <h:outputLabel for="xInput" value="Enter the coordinate X"/>
+                <h:outputLabel for="xInput" value="#{bundle['input.x']}"/>
                 <h:selectOneMenu id="xInput" value="#{pointBean.x}" styleClass="select-field">
                     <f:selectItem itemValue="4" itemLabel="-4"/>
                     <f:selectItem itemValue="3" itemLabel="-3"/>
@@ -146,12 +122,12 @@
             </div>
 
             <div class="form-group">
-                <h:outputLabel for="yInput" value="Enter the coordinate Y"/>
+                <h:outputLabel for="yInput" value="#{bundle['input.y']}"/>
                 <h:inputText id="yInput" a:placeholder="-5...3" value="#{pointBean.y}" styleClass="input-field"/>
             </div>
 
             <div class="form-group">
-                <h:outputLabel for="rInput" value="Enter the radius"/>
+                <h:outputLabel for="rInput" value="#{bundle['input.r']}"/>
                 <h:selectOneMenu id="rInput" value="#{pointBean.r}" styleClass="select-field" onchange="reDrawAxis(this.value)">
                     <f:selectItem itemValue="3" itemLabel="3"/>
                     <f:selectItem itemValue="2.5" itemLabel="2.5"/>
@@ -162,13 +138,13 @@
             </div>
 
             <div class="form-group">
-                <h:commandButton id="checkButton" value="submit" styleClass="button" onclick="return validation()" >
+                <h:commandButton id="checkButton" value="#{bundle['button.submit']}" styleClass="button" onclick="return validation()" >
                     <f:ajax execute="@form"
                             listener="#{checkPointBean.check(pointBean)}"
                             render="resultsTable"/>
                 </h:commandButton>
 
-                <h:button id="clear" value="clear points" styleClass="button" onclick="clearPoints(); return false"/>
+                <h:button id="clear" value="#{bundle['button.clear']}" styleClass="button" onclick="clearPoints(); return false"/>
             </div>
             <div><label id="status"></label></div>
         </div>
@@ -183,37 +159,37 @@
                          paginatorPosition="bottom"
                          styleClass="table">
                 <h:column>
-                    <f:facet name="header">X</f:facet>
+                    <f:facet name="header">#{bundle['table.column.x']}</f:facet>
                     <h:outputText value="#{result.x}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Y</f:facet>
+                    <f:facet name="header">#{bundle['table.column.y']}</f:facet>
                     <h:outputText value="#{result.y}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">R</f:facet>
+                    <f:facet name="header">#{bundle['table.column.r']}</f:facet>
                     <h:outputText value="#{result.r}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Result</f:facet>
+                    <f:facet name="header">#{bundle['table.column.result']}</f:facet>
                     <h:outputText value="#{result.isHit}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Execution Time</f:facet>
+                    <f:facet name="header">#{bundle['table.column.execution_time']}</f:facet>
                     <h:outputText value="#{result.execution_time}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Server Time</f:facet>
+                    <f:facet name="header">#{bundle['table.column.server_time']}</f:facet>
                     <h:outputText id="server_time" value="#{result.server_time}"/>
                 </h:column>
 
             </h:dataTable>
 
             <h:panelGrid columns="2">
-                <h:commandLink value="Previous" action="#{checkPointBean.previousPage}">
+                <h:commandLink value="#{bundle['pagination.previous']}" action="#{checkPointBean.previousPage}">
                     <f:ajax execute="resultsTable" render="resultsTable"/>
                 </h:commandLink>
-                <h:commandLink value="Next" action="#{checkPointBean.nextPage}" disabled="#{checkPointBean.currentPage == checkPointBean.totalPages - 1}">
+                <h:commandLink value="#{bundle['pagination.next']}" action="#{checkPointBean.nextPage}" disabled="#{checkPointBean.currentPage == checkPointBean.totalPages - 1}">
                     <f:ajax execute="resultsTable" render="resultsTable"/>
                 </h:commandLink>
 
