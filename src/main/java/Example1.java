@@ -1,3 +1,3 @@
 public class Example1 {
-    public int trah;
+    public int newValue;
 }
