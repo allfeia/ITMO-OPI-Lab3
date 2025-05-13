@@ -289,7 +289,7 @@
                 <configuration>
                   <connectionType>connection</connectionType>
                   <connectionUrl>scm:git:${git.repo.url}</connectionUrl>
-                  <basedirRelative>true</basedirRelative>
+<!--                  <basedirRelative>true</basedirRelative>-->
                   <includes>${diff.classes}</includes>
 <!--                  <excludes>**/target/**,.idea/**,*.iml</excludes>-->
                   <message>Auto-commit changes in ${diff.classes}</message>
