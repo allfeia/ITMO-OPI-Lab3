@@ -97,7 +97,7 @@
         </plugins>
     </build>
 
-    <!--  target build with compile, war, music (packaging before tests)-->
+    <!--  build with compile, war, music (packaging before tests)-->
 
     <profiles>
         <profile>
