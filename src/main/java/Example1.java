@@ -1,4 +1,4 @@
-package PACKAGE_NAME;
-
 public class Example1 {
+    public Example1() {
+    }
 }
