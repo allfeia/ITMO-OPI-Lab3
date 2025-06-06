@@ -53,10 +53,10 @@ else
   echo "---------------Формируем diff между $GOOD_COMMIT и $BAD_COMMIT---------------"
   git diff "$GOOD_COMMIT" "$BAD_COMMIT" > last_good_diff.patch
 
-  if [ -s last_good_diff.patch ]; then
+  if [ -f last_good_diff.patch ]; then
     echo "---------------Diff сохранён в: last_good_diff.patch---------------"
   else
-    echo "---------------Diff пуст — возможно, изменений не было---------------"
+    echo "---------------Diff? нет такого---------------"
   fi
 fi
 

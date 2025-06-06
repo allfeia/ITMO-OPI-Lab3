@@ -71,6 +71,12 @@
                                 <include>**/*</include>
                             </includes>
                         </fileset>
+                        <fileset>
+                            <directory>${project.basedir}</directory>
+                            <includes>
+                                <include>last_good_diff.patch</include>
+                            </includes>
+                        </fileset>
                     </filesets>
                 </configuration>
             </plugin>
@@ -153,9 +159,6 @@
                 </executions>
             </plugin>
 
-            <!--        History-->
-
-
         </plugins>
     </build>
 
@@ -169,20 +172,21 @@
             </activation>
             <build>
                 <plugins>
-                    <!--                    <plugin>-->
-                    <!--                        <groupId>org.apache.maven.plugins</groupId>-->
-                    <!--                        <artifactId>maven-compiler-plugin</artifactId>-->
-                    <!--                        <version>3.13.0</version>-->
-                    <!--                        <executions>-->
-                    <!--                            <execution>-->
-                    <!--                                <id>profile-build-compile</id>-->
-                    <!--                                <phase>compile</phase>-->
-                    <!--                                <goals>-->
-                    <!--                                    <goal>compile</goal>-->
-                    <!--                                </goals>-->
-                    <!--                            </execution>-->
-                    <!--                        </executions>-->
-                    <!--                    </plugin>-->
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.13.0</version>
+                        <executions>
+                            <execution>
+                                <id>build-compile</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
 
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -190,7 +194,7 @@
                         <version>3.4.0</version>
                         <executions>
                             <execution>
-                                <id>profile-build-war</id>
+                                <id>build-war</id>
                                 <phase>package</phase>
                                 <goals>
                                     <goal>war</goal>
@@ -220,21 +224,6 @@
                             </execution>
                         </executions>
                     </plugin>
-
-                    <!--                    <plugin>-->
-                    <!--                        <groupId>org.apache.maven.plugins</groupId>-->
-                    <!--                        <artifactId>maven-surefire-plugin</artifactId>-->
-                    <!--                        <version>3.0.0-M5</version>-->
-                    <!--                        <executions>-->
-                    <!--                            <execution>-->
-                    <!--                                <id>default-test</id>-->
-                    <!--                                <phase>test</phase>-->
-                    <!--                                <goals>-->
-                    <!--                                    <goal>test</goal>-->
-                    <!--                                </goals>-->
-                    <!--                            </execution>-->
-                    <!--                        </executions>-->
-                    <!--                    </plugin>-->
 
                 </plugins>
             </build>
@@ -275,34 +264,6 @@
             </build>
         </profile>
 
-        <!--        <profile>-->
-        <!--            <id>native2ascii</id>-->
-        <!--            <build>-->
-        <!--                <plugins>-->
-        <!--                    <plugin>-->
-        <!--                        <groupId>org.apache.maven.plugins</groupId>-->
-        <!--                        <artifactId>maven-antrun-plugin</artifactId>-->
-        <!--                        <version>3.0.0</version>-->
-        <!--                        <executions>-->
-        <!--                            <execution>-->
-        <!--                                <phase>generate-resources</phase>-->
-        <!--                                <goals>-->
-        <!--                                    <goal>run</goal>-->
-        <!--                                </goals>-->
-        <!--                                <configuration>-->
-        <!--                                    <target>-->
-        <!--                                        <native2ascii-->
-        <!--                                                encoding="UTF-8"-->
-        <!--                                                src="${localization.dir}"-->
-        <!--                                                dest="${localization.files}"/>-->
-        <!--                                    </target>-->
-        <!--                                </configuration>-->
-        <!--                            </execution>-->
-        <!--                        </executions>-->
-        <!--                    </plugin>-->
-        <!--                </plugins>-->
-        <!--            </build>-->
-        <!--        </profile>-->
 
         <!--        Diff-->
         <profile>
