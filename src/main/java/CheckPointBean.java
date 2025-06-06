@@ -67,7 +67,7 @@ public class CheckPointBean implements Serializable {
         results.add(0, pointModel);
         pointDAO.savePoint(pointModel);
 
-        updateTotalPage();
+        updateTotalPages();
 
     }
 

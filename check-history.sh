@@ -42,6 +42,7 @@ BAD_COMMIT=$(git rev-list --reverse master | grep -A1 "$GOOD_COMMIT" | tail -n1)
 
 # Возврат на ветку master
 git checkout -f master
+git restore --source="$GOOD_COMMIT" --staged --worktree .
 
 echo "---------------Последний рабочий коммит: $GOOD_COMMIT---------------"
 
