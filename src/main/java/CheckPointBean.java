@@ -63,7 +63,7 @@ public class CheckPointBean implements Serializable {
         isHit = pointHit(pointBean.getX(), pointBean.getY(), pointBean.getR());
         PrimeFaces.current().executeScript("drawPoint(" + pointBean.getX() + "," + pointBean.getY() + "," + pointBean.getR() + "," + isHit + ")");
 
-        PointMode pointModel = new PointModel(pointBean.getX(), pointBean.getY(), pointBean.getR(), isHit, String.valueOf(System.nanoTime() - startTime), formatter.format(LocalDateTime.now()));
+        PointModel pointModel = new PointModel(pointBean.getX(), pointBean.getY(), pointBean.getR(), isHit, String.valueOf(System.nanoTime() - startTime), formatter.format(LocalDateTime.now()));
         results.add(0, pointModel);
         pointDAO.savePoint(pointModel);
 
