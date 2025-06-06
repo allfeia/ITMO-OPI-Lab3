@@ -71,12 +71,6 @@
                                 <include>**/*</include>
                             </includes>
                         </fileset>
-                        <fileset>
-                            <directory>${project.basedir}</directory>
-                            <includes>
-                                <include>last_good_diff.patch</include>
-                            </includes>
-                        </fileset>
                     </filesets>
                 </configuration>
             </plugin>
