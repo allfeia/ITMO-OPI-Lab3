@@ -3,7 +3,6 @@ set -e
 
 echo "---------------Запуск поиска последнего рабочего коммита---------------"
 
-BAD_COMMIT=$(git rev-parse HEAD)
 FIRST_COMMIT=$(git rev-list --max-parents=0 HEAD)
 
 function try_compile() {
@@ -20,34 +19,35 @@ function try_compile() {
   fi
 }
 
-# Ищем последний рабочий коммит
-while true; do
-  if [ "$(git rev-parse HEAD)" = "$FIRST_COMMIT" ]; then
+# Проверяем текущий HEAD и всю историю вниз
+GOOD_COMMIT=""
+for commit in $(git rev-list HEAD); do
+  if try_compile "$commit"; then
+    GOOD_COMMIT="$commit"
+    break
+  fi
+
+  if [ "$commit" = "$FIRST_COMMIT" ]; then
     echo "---------------Не найдено ни одного рабочего коммита---------------"
     git checkout -f master
     exit 1
   fi
-
-  git checkout -f HEAD~1 > /dev/null
-
-  if try_compile "$(git rev-parse HEAD)"; then
-    GOOD_COMMIT=$(git rev-parse HEAD)
-    # Получаем коммит, следующий за рабочим
-    BAD_COMMIT=$(git rev-list --reverse master | grep -A1 "$GOOD_COMMIT" | tail -n1)
-    echo "---------------Последний рабочий коммит: $GOOD_COMMIT---------------"
-    echo "---------------Следующий коммит, который сломался: $BAD_COMMIT---------------"
-    break
-  fi
 done
 
-# Формируем diff между рабочим и сломанным коммитом
+# Получаем BAD_COMMIT — следующий после GOOD_COMMIT
+BAD_COMMIT=$(git rev-list --reverse master | grep -A1 "$GOOD_COMMIT" | tail -n1)
+
+echo "---------------Последний рабочий коммит: $GOOD_COMMIT---------------"
+echo "---------------Следующий коммит, который сломался: $BAD_COMMIT---------------"
+
+# Формируем diff
 echo "---------------Формируем diff между $GOOD_COMMIT и $BAD_COMMIT---------------"
 git diff "$GOOD_COMMIT" "$BAD_COMMIT" > last_good_diff.patch
 
 if [ -s last_good_diff.patch ]; then
-    echo "---------------Diff сохранён в: last_good_diff.patch---------------"
+  echo "---------------Diff сохранён в: last_good_diff.patch---------------"
 else
-    echo "---------------Diff пуст — возможно, изменений не было---------------"
+  echo "---------------Diff пуст — возможно, изменений не было---------------"
 fi
 
 # Возврат на ветку master
