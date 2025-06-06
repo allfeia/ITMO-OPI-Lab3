@@ -71,7 +71,7 @@ public class CheckPointBean implements Serializable {
 
     }
 
-    publi boolean pointHit(double x, double y, double r) {
+    public boolean pointHit(double x, double y, double r) {
         if (x < 0 && y < 0) return false;
         else if (x >= 0 && y >= 0) return y <= r - 2 * x;
         else if (x <= 0 && y >= 0) return y <= r && x >= -r;
